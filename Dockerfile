@@ -12,6 +12,7 @@ RUN apt-get update && \
     xvfb \
     libxi6 \
     libgconf-2-4 \
+    gnupg \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Chrome
