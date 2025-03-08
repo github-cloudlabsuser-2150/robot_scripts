@@ -27,7 +27,7 @@ Test login
 We Are At The Login Page
     [Documentation]    opening the sign in page automation playground
     [Tags]    login
-    Open Browser    ${url}    chrome    options=add_argument("--headless");add_argument("--no-sandbox");add_argument("--disable-dev-shm-usage");add_argument("--remote-debugging-port=9222");
+    Open Browser    ${url}    firefox    #options=add_argument("--headless");add_argument("--no-sandbox");add_argument("--disable-dev-shm-usage");add_argument("--remote-debugging-port=9222");
     Click Link    ${sign}
     Wait Until Element Is Visible    //h2[normalize-space()='Login']
 

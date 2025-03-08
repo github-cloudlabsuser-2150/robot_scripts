@@ -14,23 +14,16 @@ RUN apt-get update && \
     libxi6 \
     libgconf-2-4 \
     gnupg \
+    firefox-esr \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Chrome
-RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && \
-    echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list && \
-    apt-get update && \
-    apt-get install -y google-chrome-stable
-
-# Install ChromeDriver
-RUN CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+') && \
-    CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION) && \
-    wget -N https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip -P /tmp && \
-    unzip /tmp/chromedriver_linux64.zip -d /tmp && \
-    rm /tmp/chromedriver_linux64.zip && \
-    mv /tmp/chromedriver /usr/local/bin/chromedriver && \
-    chown root:root /usr/local/bin/chromedriver && \
-    chmod 0755 /usr/local/bin/chromedriver
+# Install Geckodriver
+RUN GECKODRIVER_VERSION=$(curl -sS https://api.github.com/repos/mozilla/geckodriver/releases/latest | grep 'tag_name' | cut -d\" -f4) && \
+    wget -N https://github.com/mozilla/geckodriver/releases/download/$GECKODRIVER_VERSION/geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz -P /tmp && \
+    tar -xzf /tmp/geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz -C /usr/local/bin && \
+    rm /tmp/geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz && \
+    chown root:root /usr/local/bin/geckodriver && \
+    chmod 0755 /usr/local/bin/geckodriver
 
 # Install Robot Framework and SeleniumLibrary
 RUN pip install --no-cache-dir robotframework robotframework-seleniumlibrary
