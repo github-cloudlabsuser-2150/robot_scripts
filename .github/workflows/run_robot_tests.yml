@@ -10,7 +10,7 @@ jobs:
     - name: Run Robot Framework tests
       run: docker run -v ${{ github.workspace }}/logs:/app/logs robot-tests
     - name: Upload Robot Framework logs
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: robot-logs
         path: logs/
