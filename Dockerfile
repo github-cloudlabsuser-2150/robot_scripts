@@ -19,4 +19,4 @@ WORKDIR /app
 COPY . /app
 
 # Run the Robot Framework test
-CMD ["robot", "test/test*.robot"]
+CMD ["robot", "test/test.robot"]
