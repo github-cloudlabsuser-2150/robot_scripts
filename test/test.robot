@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation    customer service
 Library    SeleniumLibrary
-Suite Setup     we are at the login page
+Suite Setup     We Are At The Login Page
 
 *** Variables ***
 ${url}    https://automationplayground.com/crm/
@@ -12,13 +12,14 @@ ${email}    samra@gmail.com
 ${firstname}     assamnew
 ${lastname}    assa
 ${city}    gothenburg
+${chrome_user_data_dir}    ${CHROME_USER_DATA_DIR}
 
 *** Test Cases ***
 Test login
     [Documentation]    login with a correct credential
     [Tags]    login
 
-    Given The User Is Loged In    ${username}    ${password}
+    Given The User Is Logged In    ${username}    ${password}
     When Add Customer    ${email}    ${firstname}    ${lastname}    ${city}
     Then Customer Gets Confirmation
 
@@ -26,12 +27,11 @@ Test login
 We Are At The Login Page
     [Documentation]    opening the sign in page automation playground
     [Tags]    login
-    Open Browser    browser=chrome
-    Go To    ${url}
+    Open Browser    ${url}    chrome    options=--user-data-dir=${chrome_user_data_dir}
     Click Link    ${sign}
     Wait Until Element Is Visible    //h2[normalize-space()='Login']
 
-The user is loged in
+The User Is Logged In
     [Documentation]    Giving Username and Password
     [Tags]   login
     [Arguments]    ${user}    ${pass}
