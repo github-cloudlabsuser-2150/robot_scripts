@@ -37,5 +37,5 @@ RUN pip install --no-cache-dir robotframework robotframework-seleniumlibrary
 # Copy the Robot Framework test cases into the container
 COPY . /app
 
-# Set the entry point to run the Robot Framework tests
-ENTRYPOINT ["robot", "test/test.robot"]
+# Start xvfb and set the display environment variable
+CMD ["sh", "-c", "Xvfb :99 -ac & export DISPLAY=:99 && robot --outputdir logs test/test.robot"]
