@@ -14,3 +14,11 @@ jobs:
       with:
         name: robot-logs
         path: logs/
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: pip install beautifulsoup4
+    - name: Analyze HTML logs
+      run: python scripts/parse_logs.py
