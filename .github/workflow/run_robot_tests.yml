@@ -5,7 +5,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Build and run Docker container
-      run: |
-        docker build -t robot-tests .
-        docker run robot-tests
+    - name: Build Docker container
+      run: docker build -t robot-tests .
+    - name: Run Robot Framework tests
+      run: docker run -v ${{ github.workspace }}/logs:/app/logs robot-tests
+    - name: Upload Robot Framework logs
+      uses: actions/upload-artifact@v2
+      with:
+        name: robot-logs
+        path: logs/
