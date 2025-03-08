@@ -12,7 +12,7 @@ ${email}    samra@gmail.com
 ${firstname}     assamnew
 ${lastname}    assa
 ${city}    gothenburg
-# ${chrome_user_data_dir}    /app/chrome-user-data-${RANDOM}
+${chrome_options}    --headless --no-sandbox --disable-dev-shm-usage --remote-debugging-port=9222
 
 *** Test Cases ***
 Test login
@@ -27,7 +27,7 @@ Test login
 We Are At The Login Page
     [Documentation]    opening the sign in page automation playground
     [Tags]    login
-    Open Browser    ${url}    chrome    # options=--user-data-dir=${chrome_user_data_dir}
+    Open Browser    ${url}    chrome    options=${chrome_options}
     Click Link    ${sign}
     Wait Until Element Is Visible    //h2[normalize-space()='Login']
 
