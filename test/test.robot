@@ -12,7 +12,7 @@ ${email}    samra@gmail.com
 ${firstname}     assamnew
 ${lastname}    assa
 ${city}    gothenburg
-${chrome_user_data_dir}    ${CHROME_USER_DATA_DIR}
+${chrome_user_data_dir}    /app/chrome-user-data
 
 *** Test Cases ***
 Test login
@@ -27,7 +27,7 @@ Test login
 We Are At The Login Page
     [Documentation]    opening the sign in page automation playground
     [Tags]    login
-    Open Browser    ${url}    chrome    options=--user-data-dir=${chrome_user_data_dir}
+    Open Browser    ${url}    chrome    options=add_argument("--user-data-dir=${chrome_user_data_dir}")
     Click Link    ${sign}
     Wait Until Element Is Visible    //h2[normalize-space()='Login']
 
