@@ -27,8 +27,7 @@ Test login
 We Are At The Login Page
     [Documentation]    opening the sign in page automation playground
     [Tags]    login
-    Open Browser    browser=chrome
-    Go To    ${url}
+    Open Browser    ${url}    chrome    options=${chrome_options}
     Click Link    ${sign}
     Wait Until Element Is Visible    //h2[normalize-space()='Login']
 
